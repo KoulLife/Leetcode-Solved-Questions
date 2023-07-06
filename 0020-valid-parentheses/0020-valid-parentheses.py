@@ -6,11 +6,10 @@ class Solution:
         for i in s:
             if i not in map:
                 stack.append(i)
-                continue
-            
+                
             elif not stack or stack[-1] != map[i]:
                 return False
             
-            stack.pop()
+            else: stack.pop()
         
         return not stack
