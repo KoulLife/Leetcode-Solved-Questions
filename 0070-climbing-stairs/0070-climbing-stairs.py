@@ -1,13 +1,10 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        if (n < 3):
-            return n
-        
-        d = [0] * (n + 1)
-        d[1] = 1
-        d[2] = 2
+        cashe = [0] * 46
+        cashe[1] = 1
+        cashe[2] = 2
         
         for i in range(3, n + 1):
-            d[i] = d[i - 1] + d[i - 2]
+            cashe[i] = cashe[i - 1] + cashe[i - 2]
         
-        return d[n]
+        return(cashe[n])
