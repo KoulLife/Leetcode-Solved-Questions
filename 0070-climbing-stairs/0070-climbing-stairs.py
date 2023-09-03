@@ -7,4 +7,4 @@ class Solution:
         for i in range(3, n + 1):
             cashe[i] = cashe[i - 1] + cashe[i - 2]
         
-        return(cashe[n])
+        return cashe[n]
