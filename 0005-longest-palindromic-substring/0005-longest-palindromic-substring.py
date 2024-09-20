@@ -1,19 +1,25 @@
-class Solution(object):
-    def longestPalindrome(self, s):
-        def slide(left, right):
-            while left>=0 and right<len(s) and s[left] == s[right]:
-            # 왼쪽과 오른쪽이 같으면 팰린드롬
-                left-=1
-                right+=1
-            return s[left+1:right]
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        def expandAroundCenter(left: int, right: int) -> str:
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return s[left + 1:right]
 
-        if len(s) == 1 or s == s[::-1]:
-        # 문자열 길이가 1 이거나 문자열 전체가 팰린드롬이면 바로 리턴 (최적화)
-            return s
-
-        ans = ""
-
-        for i in range(len(s)-1):
-            ans = max(ans, slide(i,i), slide(i,i+1), key = len)
-            # 길이가 짝수인 팰린드롬도 있을 수 있으니 i, i+1 도 추가
-        return ans
+        if len(s) == 0:
+            return ""
+    
+        longest = ""
+    
+        for i in range(len(s)):
+        # 홀수 길이 팰린드롬 (i를 중심으로 확장)
+            odd_palindrome = expandAroundCenter(i, i)
+            if len(odd_palindrome) > len(longest):
+                longest = odd_palindrome
+        
+        # 짝수 길이 팰린드롬 (i와 i+1을 중심으로 확장)
+            even_palindrome = expandAroundCenter(i, i + 1)
+            if len(even_palindrome) > len(longest):
+                longest = even_palindrome
+    
+        return longest
